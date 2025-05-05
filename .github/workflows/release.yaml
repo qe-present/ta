@@ -2,7 +2,7 @@ name: 发布release
 on:
   push:
     branches:
-      - releases/**
+      - release
 
 jobs:
   publish-tauri:
