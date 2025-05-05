@@ -1,5 +1,4 @@
 name: 打包
-
 on:
   workflow_dispatch:
     inputs:
@@ -23,14 +22,14 @@ jobs:
     runs-on: ${{ matrix.platform }}
     steps:
       - name: 读取仓库
-      - uses: actions/checkout@v4
+        uses: actions/checkout@v4
 
-      - name: 安装node
+      - name: 安装 node
         uses: actions/setup-node@v4
         with:
           node-version: "23"
 
-      - name: 安装rust
+      - name: 安装 rust
         uses: dtolnay/rust-toolchain@stable
 
       - name: 安装 pnpm
