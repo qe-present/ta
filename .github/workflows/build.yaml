@@ -31,12 +31,12 @@ jobs:
 
       - name: 安装rust
         uses: dtolnay/rust-toolchain@stable
-        with:
-          # Those targets are only used on macos runners so it's in an `if` to slightly speed up windows and linux builds.
-          targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
 
       - name: 安装 pnpm
         run: npm install -g pnpm
+
+      - name: 安装依赖
+        run: pnpm install
 
       - uses: tauri-apps/tauri-action@v0
         env:
