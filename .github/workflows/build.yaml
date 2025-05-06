@@ -9,17 +9,8 @@ on:
 
 
 jobs:
-  publish-tauri:
-    permissions:
-      contents: write
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - platform: 'windows-latest'
-            args: ''
-
-    runs-on: ${{ matrix.platform }}
+  build-upload:
+    runs-on: windows-latest
     steps:
       - name: 读取仓库
         uses: actions/checkout@v4
@@ -40,9 +31,6 @@ jobs:
 
       - name: 打包tauri
         uses: tauri-apps/tauri-action@v0
-        with:
-          includeRelease: true
-          includeDebug: false
 
       - name: 上传构建产物
         uses: actions/upload-artifact@v4
