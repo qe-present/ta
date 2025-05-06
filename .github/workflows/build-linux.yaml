@@ -1,0 +1,41 @@
+name: linux打包
+on:
+    workflow_dispatch:
+        inputs:
+            version:
+                description: '打包'
+                required: true
+                type: boolean
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+      steps:
+          - name: 读取仓库
+            uses: actions/checkout@v4
+
+          - name: 安装 node
+            uses: actions/setup-node@v4
+            with:
+                node-version: "23"
+          - name: 安装ubuntu依赖
+            run: |
+              sudo apt-get update
+              sudo apt-get install -y libwebkit2gtk-4.0-dev libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
+
+          - name: 安装 rust
+            uses: dtolnay/rust-toolchain@stable
+
+          - name: 安装 pnpm
+            run: npm install -g pnpm
+
+          - name: 安装依赖
+            run: pnpm install
+
+          - name: 打包tauri
+            uses: tauri-apps/tauri-action@v0
+
+          - name: 上传构建产物
+          uses: actions/upload-artifact@v4
+          with:
+              name: tauri-app-linux
+              path: src-tauri/target/release/bundle/
