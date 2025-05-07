@@ -19,7 +19,7 @@ jobs:
                 node-version: "23"
           - name: 添加软件源
             run: |
-              sudo echo "deb http://cz.archive.ubuntu.com/ubuntu bionic main universe" >> /etc/apt/sources.list
+              echo "deb http://cz.archive.ubuntu.com/ubuntu bionic main universe" | sudo tee -a /etc/apt/sources.list
 
           - name: 安装ubuntu依赖
             run: |
