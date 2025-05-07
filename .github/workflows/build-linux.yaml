@@ -17,6 +17,14 @@ jobs:
             uses: actions/setup-node@v4
             with:
                 node-version: "23"
+          - name: 添加软件源
+            run: |
+              sudo tee -a /etc/apt/sources.list <<< "deb http://cz.archive.ubuntu.com/ubuntu bionic main universe"
+
+          - name: 导入公钥
+            run: |
+              sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32
+
 
           - name: 安装ubuntu依赖
             run: |
