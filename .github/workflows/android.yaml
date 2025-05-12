@@ -44,5 +44,11 @@ jobs:
             with:
               targets: aarch64-linux-android,armv7-linux-androideabi,i686-linux-android,x86_64-linux-android
 
+          - name: 安装依赖
+            run: pnpm install
 
+          - name: 打包
+            run: pnpm tauri android build
+            env:
+              NDK_HOME: ${{ env.ANDROID_HOME }}/ndk/27.2.12479018
 
