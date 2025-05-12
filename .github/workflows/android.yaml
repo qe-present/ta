@@ -49,3 +49,11 @@ jobs:
 
           - name: 打包apk
             run: pnpm tauri android build -t aarch64 --apk
+            env:
+              NDK_HOME: ${{ env.ANDROID_HOME }}/ndk/27.2.12479018
+
+          - name: 上传构建产物
+            uses: actions/upload-artifact@v4
+            with:
+              name: ta
+              path: src-tauri/gen/android/app/build/outputs/apk/universal/release/app-universal-release.apk
