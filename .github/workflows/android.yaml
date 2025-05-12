@@ -32,8 +32,13 @@ jobs:
             with:
               distribution: 'temurin'
               java-version: '21'
+
+          - name: 安装 Android SDK
+            uses: android-actions/setup-android@v3
+
           - name: 安装 NDK
             run: sdkmanager "ndk;27.2.12479018"
+
           - name: 安装 Rust 和 需要的架构
             uses: dtolnay/rust-toolchain@stable
             with:
